@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import { updateSnippet } from "@/lib/actions";
 
 export default async function EditSnippetPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+    params,
+  }: Readonly<{
+    params: Promise<{ id: string }>;
+  }>) {
   const { id } = await params;
   const snippet = await prisma.snippet.findUnique({
     where: { id: Number(id) },

@@ -5,11 +5,11 @@ import { deleteSnippet } from "@/lib/actions";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
-export default async function SnippetDetailPage({
+export default async function EditSnippetPage({
   params,
-}: {
+}: Readonly<{
   params: Promise<{ id: string }>;
-}) {
+}>) {
   const { id } = await params;
   const snippet = await prisma.snippet.findUnique({
     where: { id: Number(id) },

@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 
-export default async function SnippetsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string; language?: string }>;
-}) {
+export default async function SnippetDetailPage({
+  params,
+}: Readonly<{
+  params: Promise<{ id: string }>;
+}>) {
   const { q, language } = await searchParams;
 
   const snippets = await prisma.snippet.findMany({
