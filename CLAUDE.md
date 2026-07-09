@@ -13,4 +13,4 @@ A code snippet manager built with Next.js, Prisma, and SQLite.
 - Use Prisma client from /lib/db.ts
 
 ## Current focus
-Sprint 1: core CRUD for snippets (add, list, view, edit, delete)
+Sprint 1 complete (CRUD done). Starting Sprint 2: search, filtering, and dashboard.
