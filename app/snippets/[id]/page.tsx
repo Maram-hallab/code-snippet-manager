@@ -1,7 +1,9 @@
 import { prisma } from "@/lib/db";
 import { codeToHtml } from "shiki";
 import CopyButton from "@/components/CopyButton";
+import { deleteSnippet } from "@/lib/actions";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 export default async function SnippetDetailPage({
   params,
@@ -35,7 +37,22 @@ export default async function SnippetDetailPage({
         <p className="text-gray-600 mb-4">{snippet.description}</p>
       )}
 
-      <div className="flex justify-end mb-2">
+      <div className="flex justify-end gap-2 mb-2">
+        <Link
+          href={`/snippets/${snippet.id}/edit`}
+          className="text-sm bg-gray-100 px-3 py-1.5 rounded-md hover:bg-gray-200"
+        >
+          Edit
+        </Link>
+        <form action={deleteSnippet}>
+          <input type="hidden" name="id" value={snippet.id} />
+          <button
+            type="submit"
+            className="text-sm bg-red-50 text-red-600 px-3 py-1.5 rounded-md hover:bg-red-100"
+          >
+            Delete
+          </button>
+        </form>
         <CopyButton code={snippet.code} />
       </div>
 
