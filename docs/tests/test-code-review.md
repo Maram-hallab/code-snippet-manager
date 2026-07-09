@@ -11,12 +11,23 @@ the prompt template from `prompts/code-review.md`.
 - **Issues found:** 6 total (0 High, 1 Medium, 5 Low)
 - Full list of findings: [Here are the 6 issues from the code review I ran earlier on src/app/snippets/page.tsx:
 
-1/Med — The search (title: { contains: q }) is case-sensitive on SQLite, so searching "python" won't match a title like "Reverse a string in Python." Fix: lowercase both sides for comparison, or use mode: "insensitive" if you move to Postgres.
-2/Low — The AND: [{}, {}] pattern passes empty objects when there's no search/filter, which works but is unclear. Fix: build the where object conditionally instead of always including two AND entries.
-3/Low — q and language aren't trimmed/validated, so whitespace-only input runs a search that silently returns nothing with no feedback. Fix: trim q before using it and treat empty-after-trim the same as no search.
-4/Low — The allLanguages query runs on every single page load, even when just searching by text. Not expensive now, but wasteful as data grows. Fix: consider caching or fetching this less often.
-5/Low — Naming clarity: language is used both as the search param and as the loop variable (l.language), which is mildly confusing to read. Fix: rename the loop variable, e.g. entry.language.
-6/Low — No <label> elements for the search input or language dropdown (only a placeholder on the input) — an accessibility gap. Fix: add visually-hidden <label> tags for screen readers.]
+1. **Med** — The search (`title: { contains: q }`) is case-sensitive on SQLite, 
+   so searching "python" won't match a title like "Reverse a string in Python." 
+   Fix: lowercase both sides for comparison, or use `mode: "insensitive"` if 
+   moving to Postgres.
+2. **Low** — The `AND: [{}, {}]` pattern passes empty objects when there's no 
+   search/filter — works but unclear. Fix: build the `where` object 
+   conditionally.
+3. **Low** — `q` and `language` aren't trimmed/validated, so whitespace-only 
+   input silently returns nothing. Fix: trim `q` before use.
+4. **Low** — The `allLanguages` query runs on every page load, even when just 
+   searching by text. Fix: consider caching or fetching less often.
+5. **Low** — Naming clarity: `language` is used both as the search param and 
+   the loop variable (`l.language`). Fix: rename the loop variable.
+6. **Low** — No `<label>` elements for the search input or dropdown — an 
+   accessibility gap. Fix: add visually-hidden `<label>` tags.
+
+No High-severity issues found.]
 
 ## Manual Review (estimated baseline)
 - **Estimated time for a mid/senior developer:** 10-15 minutes for a 
