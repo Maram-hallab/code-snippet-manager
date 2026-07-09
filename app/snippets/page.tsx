@@ -1,19 +1,17 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 
-export default async function SnippetDetailPage({
-  params,
+export default async function SnippetsPage({
+  searchParams,
 }: Readonly<{
-  params: Promise<{ id: string }>;
+  searchParams: Promise<{ q?: string; language?: string }>;
 }>) {
   const { q, language } = await searchParams;
 
   const snippets = await prisma.snippet.findMany({
     where: {
       AND: [
-        q
-          ? { title: { contains: q } }
-          : {},
+        q ? { title: { contains: q } } : {},
         language ? { language: language } : {},
       ],
     },
@@ -95,14 +93,18 @@ export default async function SnippetDetailPage({
               </div>
               {snippet.tags && (
                 <div className="flex gap-2 flex-wrap">
-                  {snippet.tags.split(",").map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs text-gray-500 bg-gray-50 px-2 py-0.5 rounded"
-                    >
-                      #{tag.trim()}
-                    </span>
-                  ))}
+                  {snippet.tags
+                    .split(",")
+                    .map((tag) => tag.trim())
+                    .filter((tag) => tag.length > 0)
+                    .map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs text-gray-500 bg-gray-50 px-2 py-0.5 rounded"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
                 </div>
               )}
             </Link>

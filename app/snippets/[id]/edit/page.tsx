@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import { updateSnippet } from "@/lib/actions";
 
 export default async function EditSnippetPage({
-    params,
-  }: Readonly<{
-    params: Promise<{ id: string }>;
-  }>) {
+  params,
+}: Readonly<{
+  params: Promise<{ id: string }>;
+}>) {
   const { id } = await params;
   const snippet = await prisma.snippet.findUnique({
     where: { id: Number(id) },
@@ -24,8 +24,11 @@ export default async function EditSnippetPage({
         <input type="hidden" name="id" value={snippet.id} />
 
         <div>
-          <label className="block text-sm font-medium mb-1">Title *</label>
+          <label htmlFor="title" className="block text-sm font-medium mb-1">
+            Title *
+          </label>
           <input
+            id="title"
             type="text"
             name="title"
             defaultValue={snippet.title}
@@ -35,8 +38,11 @@ export default async function EditSnippetPage({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Code *</label>
+          <label htmlFor="code" className="block text-sm font-medium mb-1">
+            Code *
+          </label>
           <textarea
+            id="code"
             name="code"
             defaultValue={snippet.code}
             required
@@ -46,8 +52,11 @@ export default async function EditSnippetPage({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">Language *</label>
+          <label htmlFor="language" className="block text-sm font-medium mb-1">
+            Language *
+          </label>
           <select
+            id="language"
             name="language"
             defaultValue={snippet.language}
             required
@@ -64,10 +73,11 @@ export default async function EditSnippetPage({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
+          <label htmlFor="tags" className="block text-sm font-medium mb-1">
             Tags (comma-separated)
           </label>
           <input
+            id="tags"
             type="text"
             name="tags"
             defaultValue={snippet.tags ?? ""}
@@ -76,10 +86,11 @@ export default async function EditSnippetPage({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1">
+          <label htmlFor="description" className="block text-sm font-medium mb-1">
             Description
           </label>
           <textarea
+            id="description"
             name="description"
             defaultValue={snippet.description ?? ""}
             rows={3}

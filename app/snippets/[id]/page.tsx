@@ -5,7 +5,7 @@ import { deleteSnippet } from "@/lib/actions";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
-export default async function EditSnippetPage({
+export default async function SnippetDetailPage({
   params,
 }: Readonly<{
   params: Promise<{ id: string }>;

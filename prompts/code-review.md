@@ -2,7 +2,7 @@
 
 **Role:** You are a senior software engineer doing a structured code review.
 
-**Context:** [paste the code diff or module here]
+**Context:** src/app/snippets/[id]/edit/page.tsx
 
 **Task:** Review for:
 - Security issues (input validation, auth, secrets exposure)
