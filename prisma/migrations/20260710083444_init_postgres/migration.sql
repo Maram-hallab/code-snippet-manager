@@ -1,10 +1,12 @@
 -- CreateTable
 CREATE TABLE "Snippet" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "code" TEXT NOT NULL,
     "language" TEXT NOT NULL,
     "tags" TEXT,
     "description" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Snippet_pkey" PRIMARY KEY ("id")
 );
