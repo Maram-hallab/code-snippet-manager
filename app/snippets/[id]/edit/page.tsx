@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { updateSnippet } from "@/lib/actions";
-
+export const dynamic = "force-dynamic";
 export default async function EditSnippetPage({
   params,
 }: Readonly<{
