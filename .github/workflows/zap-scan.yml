@@ -3,6 +3,10 @@ name: OWASP ZAP Baseline Scan
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   zap_scan:
     runs-on: ubuntu-latest
@@ -13,3 +17,4 @@ jobs:
         with:
           target: 'https://code-snippet-manager-atle.vercel.app'
           fail_action: false
+          allow_issue_writing: false
