@@ -1,0 +1,15 @@
+name: OWASP ZAP Baseline Scan
+
+on:
+  workflow_dispatch:
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan the live site
+    steps:
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: 'https://code-snippet-manager-atle.vercel.app'
+          fail_action: false
