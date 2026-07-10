@@ -7,15 +7,20 @@ export type CreateSnippetState = {
   error?: string;
 };
 
+function getString(formData: FormData, key: string): string {
+  const value = formData.get(key);
+  return typeof value === "string" ? value.trim() : "";
+}
+
 export async function createSnippet(
   _prevState: CreateSnippetState,
   formData: FormData,
 ): Promise<CreateSnippetState> {
-  const title = String(formData.get("title") ?? "").trim();
-  const code = String(formData.get("code") ?? "").trim();
-  const language = String(formData.get("language") ?? "").trim();
-  const tags = String(formData.get("tags") ?? "").trim();
-  const description = String(formData.get("description") ?? "").trim();
+  const title = getString(formData, "title");
+  const code = getString(formData, "code");
+  const language = getString(formData, "language");
+  const tags = getString(formData, "tags");
+  const description = getString(formData, "description");
 
   if (!title) {
     return { error: "Title is required." };
